@@ -1,0 +1,60 @@
+name: Gradle build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  gradle:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    env:
+      COMMIT_HASH: GITHUB_SHA
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - id: release
+        uses: rymndhng/release-on-push-action@master
+        with:
+          bump_version_scheme: minor
+      - name: Check Output Parameters
+        id: check-output-params
+        run: |
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        id: build-publish
+        with:
+          distribution: zulu
+          java-version: 15
+      - name: Check parameters
+        run: |
+          echo "Project variable admin"
+          echo "::set-output name=today::$(date +'%Y-%m-%d')"
+          echo "Today is ${{ steps.build-publish.outputs.today }} "
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Execute Gradle build
+        run: ./gradlew build
+
+      - name: Execute Gradle tests
+        run: ./gradlew jvmTest
+
+      - name: Publish package
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish
+        env:
+          BUILD_DATE: ${{ steps.build-publish.outputs.today }}
+          TAG_NAME: ${{ steps.release.outputs.tag_name }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
