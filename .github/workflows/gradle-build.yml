@@ -47,8 +47,9 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew build
 
-      - name: Execute Gradle tests
-        run: ./gradlew jvmTest
+      - name: Execute Gradle build
+        run: ./gradlew shadowJar
+
 
       - name: Publish package
         uses: gradle/gradle-build-action@v2

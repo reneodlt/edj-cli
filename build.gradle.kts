@@ -26,8 +26,8 @@ repositories {
     mavenCentral()
     maven("https://maven.pkg.github.com/reneodlt/edj-lib") {
         credentials {
-            username = "ragmondo"
-            password = "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"
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
         }
     }
 }
@@ -64,9 +64,7 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "15"
 }
 
-application {
-    mainClass.set("MainKt")
-}
+
 
 publishing {
     publications {
@@ -78,7 +76,7 @@ publishing {
             artifactId = "edj-cli"
             version = versionString()
             from(components["kotlin"])
-//            from(components["java"])
+            artifact(tasks["shadowJar"])
         }
     }
 
