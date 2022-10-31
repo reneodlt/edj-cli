@@ -36,7 +36,7 @@ dependencies {
     implementation("org.apache.commons:commons-configuration2:2.8.0")
     implementation("commons-beanutils:commons-beanutils:1.9.4")
 
-    implementation("com.reneodlt:edj:v0.14.0")
+    implementation("com.reneodlt:edj:v0.17.0")
 //    implementation("com.reneodlt:edj:SNAPSHOT")
 
     implementation("org.apache.logging.log4j:log4j:2.19.0")
