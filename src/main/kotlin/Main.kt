@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
         if (update == true) {
             println("Updating for ${it.key.path}")
             try {
-                it.key.executePathUpdateSQL(edj.connections.first().conn)
+                it.key.executePathUpdateSQL()
             }
             // TODO: Make this a app error, not an sql error ?
             catch (e: org.sqlite.SQLiteException) {
