@@ -37,8 +37,10 @@ dependencies {
     implementation("commons-beanutils:commons-beanutils:1.9.4")
 
 //    implementation("com.reneodlt:com.reneodlt.edj-lib:v0.18.0")
-    implementation("com.reneodlt:edj:v0.18.0")
+    implementation("com.reneodlt:edj-lib:v0.18.0")
 //    implementation("com.reneodlt:edj:SNAPSHOT")
+
+
 
     implementation("org.apache.logging.log4j:log4j:2.19.0")
     implementation("org.slf4j:slf4j-simple:2.0.3")
