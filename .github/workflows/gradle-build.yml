@@ -45,6 +45,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
+        env: 
+          GITHUB_ACTOR: ${{ secrets.LIB_SECRET_USER }}
+          GITHUB_TOKEN: ${{ secrets.LIB_SECRET_KEY }}
         run: ./gradlew build
 
       - name: Execute Gradle build
