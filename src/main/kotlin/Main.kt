@@ -1,5 +1,4 @@
 import com.reneodlt.edj.EDJ
-import com.reneodlt.edj.EDJPlaylist
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import org.apache.commons.configuration2.builder.fluent.Configurations
@@ -59,7 +58,7 @@ fun main(args: Array<String>) {
         if (update == true) {
             println("Updating for ${it.key.path}")
             try {
-                it.key.executePathUpdateSQL()
+                it.key.executePathUpdateSQL(edj.connections.first().conn)
             }
             // TODO: Make this a app error, not an sql error ?
             catch (e: org.sqlite.SQLiteException) {
