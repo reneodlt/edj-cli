@@ -37,7 +37,7 @@ dependencies {
     implementation("commons-beanutils:commons-beanutils:1.9.4")
 
 //    implementation("com.reneodlt:com.reneodlt.edj-lib:v0.18.0")
-    implementation("com.reneodlt:edj-lib:v0.18.0")
+    implementation("com.reneodlt:edj:v0.18.0")
 //    implementation("com.reneodlt:edj:SNAPSHOT")
 
 
